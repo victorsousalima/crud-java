@@ -1,6 +1,7 @@
 package application;
 
 import db.DB;
+import db.DbException;
 import model.dao.DaoFactory;
 import model.dao.UsuarioDao;
 import model.entites.Usuario;
@@ -129,6 +130,9 @@ public class Program {
 
                         usuarioDao.update(usuario);
                     }
+                }
+                else {
+                    throw new DbException("Usuário não encontrado!");
                 }
             }
             else if (opc == 4) {
