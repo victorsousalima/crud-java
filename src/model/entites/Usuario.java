@@ -2,9 +2,12 @@ package model.entites;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Usuario implements Serializable {
+
+    private DateTimeFormatter fmt = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private Integer id;
     private String nome;
@@ -13,6 +16,14 @@ public class Usuario implements Serializable {
     private String telefone;
 
     public Usuario() {}
+
+    public Usuario(String nome, String email, LocalDate data_nascimento, String telefone) {
+        this.id = null;
+        this.nome = nome;
+        this.email = email;
+        this.data_nascimento = data_nascimento;
+        this.telefone = telefone;
+    }
 
     public Usuario(Integer id, String nome, String email, LocalDate data_nascimento, String telefone) {
         this.id = id;
@@ -79,12 +90,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario { " +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", data_nascimento=" + data_nascimento +
-                ", telefone='" + telefone + '\'' +
-                '}';
+        return this.id +
+                ", " + this.nome + ", " + this.email + ", " + fmt.format(this.data_nascimento) + ", " + this.telefone;
     }
 }

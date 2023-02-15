@@ -24,7 +24,7 @@ public class UsuarioJDBC implements UsuarioDao {
             st = conn.prepareStatement("INSERT INTO usuario " +
                     "(nome, email, data_nascimento, telefone) " +
                     "VALUES " +
-                    "(?, ?, ?, ?)");
+                    "(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
 
             st.setString(1, usuario.getNome());
             st.setString(2, usuario.getEmail());
@@ -38,6 +38,12 @@ public class UsuarioJDBC implements UsuarioDao {
 
             if (rows > 0) {
                 System.out.println("Usuário adicionado com sucesso!");
+                ResultSet rs = st.getGeneratedKeys();
+                if (rs.next()) {
+                    int id = rs.getInt(1);
+                    usuario.setId(id);
+                }
+                DB.closeResultSet(rs);
             }
             else {
                 throw new DbException("Ocorreu um erro e o usuário não foi adicionado!");
@@ -96,7 +102,7 @@ public class UsuarioJDBC implements UsuarioDao {
             int rows = st.executeUpdate();
 
             if (rows > 0) {
-                System.out.printf("Usuário com id %d deletado com sucesso!", id);
+                System.out.printf("Usuário com id %d deletado com sucesso!\n", id);
             }
             else {
                 throw new DbException("Ocorreu um erro e o usuário com id " + id + " não foi deletado!");
