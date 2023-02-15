@@ -131,9 +131,6 @@ public class Program {
                         usuarioDao.update(usuario);
                     }
                 }
-                else {
-                    throw new DbException("Usuário não encontrado!");
-                }
             }
             else if (opc == 4) {
                 System.out.print("Id do usuário que deseja deletar: ");
