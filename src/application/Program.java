@@ -30,6 +30,7 @@ public class Program {
                 System.out.print("Nome do usuário:");
                 String nome = leia.nextLine();
 
+
                 System.out.print("Email do usuário: ");
                 String email = leia.nextLine();
 
@@ -142,6 +143,7 @@ public class Program {
 
         } while (opc != 0);
 
+        DB.closeConnection();
 
         leia.close();
     }
